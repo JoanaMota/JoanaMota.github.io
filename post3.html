@@ -57,10 +57,10 @@
           <div class="col-lg-8 col-md-10 mx-auto">
             <div class="post-heading">
               <h1>Week 3</h1>
-              <h2 class="subheading">ROS Workshop and Preliminary Report</h2>
+              <h2 class="subheading">Presentation, State of the art and first data acquisition</h2>
               <span class="meta">Posted by
                 <a href="#">Joana Mota</a>
-                on March 12, 2018</span>
+                on March 18, 2018</span>
             </div>
           </div>
         </div>
@@ -72,10 +72,24 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
-              <p>Creation of the blog.</p>
-              <p>Presentation for the first LAR Meeting.</p>
-              <p>Read the other lar members thesis in this subject.... elaborate which ones and what they talk about and conclusions</p>
-              <p>Instalation of the drivers for the kinect and was able to see a point cloud of the working area near the FANUC robot. Por imagem </p>
+              <p><b>Presentation.</b></p>
+              <p>On March 16 we had our first LAR Meeting, in which every member of the <a href="http://lars.mec.ua.pt/">LAR</a> 
+                had to present their thesis subject and expected tasks for this semester.</p>
+                
+              <p><b>State of the art.</b></p>
+              <p>In order to write my project's state of the art and study what has already been done to solve the problems of bin-picking, I first started to read the other <a href="http://lars.mec.ua.pt/">LAR</a>  members thesis in this subject.
+                I focused mainly in Nuno Santos's and Rogrigo Salgueiro's theses because they both use the point cloud data obtained by the Kinect. 
+                However, they use different techniques for the object recognition. Nuno after clustering the point cloud in different objects he would compare each object with a model of a sphere, cylinder or plane.
+                <img class="img-fluid" src="img/nuno.png" alt="">
+                On the other hand, Rodrigo compared the point cloud data with the point cloud of the CAD models to identify the desired object.</p>
+                <img class="img-fluid" src="img/rodrigo.png" alt="">
+                
+                <p><b>First data acquisition from the Kinect.</b></p>
+                <p>In order to use the Kinect I firstly needed to install OpenNI and Kinect driver by following <a href="http://wiki.ros.org/Robots/evarobot/Tutorials/indigo/Kinect/">these steps</a>. 
+                  Afterwards I was able to run Kinect on ROS and visualise it's data in Rviz.</p>
+                <p>Since I needed to process the data without being always connected to the Kinect I recorded into a rosbag. In the next picture we can see a point cloud 
+                  of the working area near the FANUC robot.</p>
+                <img class="img-fluid" src="img/pointCloud.png" alt="">
           </div>
         </div>
       </div>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Joana Mota - Master Thesis Blog</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/clean-blog.min.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Joana Mota</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('img/week.png')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="post-heading">
+              <h1>Week 4</h1>
+              <h2 class="subheading">Developments on the installation of the laser sensor and the Kinect. Segmentation of the data acquired from the Kinect.</h2>
+              <span class="meta">Posted by
+                <a href="#">Joana Mota</a>
+                on March 25, 2018</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+              <p>This week I started with some research on the various applications of bin-picking in the industry nowadays 
+                and continue reading other academic papers on the different processes utilized to segment the point clouds acquired 
+              by the RGB_D sensors. I also tudied some algorithms utilized for object detection and for filtering point clouds used in the <a href="http://pointclouds.org/">Point Cloud Library</a>. </p>
+              
+              <p>Apart from this, these week was specially marked by some developments on the installation of the hardware and acquisition and processing of data.</p>
+              
+              <font size="6"><b>Kinect</b></font>
+              
+              <p>In order to decide de correct position to install the Kinect, I recorded some frames for the different possible positions of the sensor on the robot, 
+                which are represented next.
+              </p>
+              <p><b>Point Cloud 1 - </b>Kinect with 4 degrees of freedom closer to the 4th joint of the robot.</p>
+              <table width="1000" border="0x" cellpadding="5">
+
+                <tr>
+                
+                  <td align="center" valign="center">
+                  <img src="img/j4.png" alt="" width="100%" height="10%"/>
+                  </td>
+                  <td align="left" valign="center">
+                      <img src="img/robotJ4.jpg" alt="" width="40%" height="40%"/>
+                  </td>
+                  
+                </tr>
+              </table>
+              
+              <p><b>Point Cloud 2 - </b>Kinect with 4 degrees of freedom closer to the 5th joint of the robot.</p>
+              <table width="1000" border="0" cellpadding="5">
+
+                <tr>
+                
+                  <td align="center" valign="center">
+                  <img src="img/j5.png" alt="" width="100%" height="10%"/>
+                  </td>
+                  <td align="left" valign="center">
+                      <img src="img/robotJ5.jpg" alt="" width="40%" height="40%"/>
+                  </td>
+                  
+                </tr>
+              </table>
+
+              <p><b>Point Cloud 3 - </b>Kinect with 6 degrees of freedom.</p>
+              <table width="1000" border="0" cellpadding="5">
+
+                <tr>
+                
+                  <td align="center" valign="center">
+                  <img src="img/j6.png" alt="" width="100%" height="10%"/>
+                  </td>
+                  <td align="left" valign="center">
+                      <img src="img/robotJ6.jpg" alt="" width="40%" height="40%"/>
+                  </td>
+                  
+                </tr>
+              </table>
+
+              <p>Afterwards I began to segment the point cloud 2, for the detection of a simple object, a box, and  
+                created a launch file to run all the necessary programs for the visualization of the results. 
+              I started by eliminating parts of the point cloud, in order to simplify and keep only the points that represent the objects.
+             The filters used where the follow:</p>
+              <ul>
+                <li>PassThrough filter - used to identify and/or eliminate points within a specific range of X, Y and Z values.</li>
+                <li>VoxelGrid filter - used to simplify the cloud, by wrapping the point cloud with a three-dimensional grid and reducing
+                  the number of points to the center points within each bloc of the grid.</li>
+              </ul>
+
+              <font size="6"><b>Laser Sensor</b></font>
+              
+
+              <p>I wrote and uploaded the code in the Arduino UNO to send the distance read by the sensor through the serial port.</p>
+              <!-- HTML generated using hilite.me -->
+<div style="background: #272822; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #66d9ef">const</span> <span style="color: #66d9ef">int</span> <span style="color: #f8f8f2">analogInPin</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">A0;</span>  <span style="color: #75715e">// Analog input pin </span>
+<span style="color: #66d9ef">float</span> <span style="color: #f8f8f2">sensorValue</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">;</span>       <span style="color: #75715e">// Value read from the sensor</span>
+<span style="color: #66d9ef">float</span> <span style="color: #f8f8f2">DistanceSENSICK;</span>
+
+<span style="color: #66d9ef">void</span> <span style="color: #a6e22e">setup</span><span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">{</span>
+  <span style="color: #75715e">// initialize serial communications at 9600 bps:</span>
+  <span style="color: #f8f8f2">Serial.begin</span> <span style="color: #f8f8f2">(</span><span style="color: #ae81ff">9600</span><span style="color: #f8f8f2">);</span>
+<span style="color: #f8f8f2">}</span>
+
+<span style="color: #66d9ef">void</span> <span style="color: #a6e22e">loop</span><span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">{</span>
+
+  <span style="color: #75715e">//--------SENSIK--------</span>
+  <span style="color: #75715e">// read the analog input value:</span>
+  <span style="color: #f8f8f2">sensorValue</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">analogRead(analogInPin);</span>
+
+  <span style="color: #f8f8f2">DistanceSENSICK</span><span style="color: #f92672">=-</span><span style="color: #ae81ff">1.0708</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">sensorValue</span><span style="color: #f92672">+</span><span style="color: #ae81ff">831.96</span><span style="color: #f8f8f2">;</span>
+  
+  <span style="color: #75715e">// print the Distance to the Serial Monitor:</span>
+  <span style="color: #f8f8f2">Serial.print(DistanceSENSICK);</span>
+  <span style="color: #f8f8f2">Serial.print(</span><span style="color: #e6db74">&quot;</span><span style="color: #ae81ff">\n</span><span style="color: #e6db74">&quot;</span><span style="color: #f8f8f2">);</span>   
+  
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+                
+
+              <p>Since the output signal of the sensor is not a distance in a scale of meters, it has to be converted by a linear regression, which can be seen in the code above.
+                To determine this equation it is necessary to gather some values of the sensor readings and its corresponding distance, and plot the best regression.
+                </p>
+              <p>Moreover, I started a C++ course to learn in which ways this programing language differs in comparison with C.</p>
+            </div>
+        </div>
+      </div>
+    </article>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+            <p class="copyright text-muted">Copyright &copy; Your Website 2018</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/clean-blog.min.js"></script>
+
+  </body>
+
+</html>

@@ -60,7 +60,7 @@
           <div class="col-lg-8 col-md-10 mx-auto">
             <div class="post-heading">
               <h1>Week 5-6 </h1>
-              <h2 class="subheading">Installation of the laser sensor and processing its output signal. Processing of the data acquired from the Kinect.</h2>
+              <h2 class="subheading">Installation of the laser sensor and processing its output signal. Processing of the data acquired from the Kinect to determine the centroid of an object and its normal.</h2>
               <span class="meta">Posted by
                 <a href="about.html">Joana Mota</a>
                 on April 5, 2018</span>
@@ -75,10 +75,11 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
+            <font size="6"><b>Laser Sensor</b></font>
             <p>In order to carry on the the work from last week on the laser sensor, it was necessary to determine the most suitable equation
               to converte the output signal of the sensor into a distance. To do so I had to convert the current output signal into a voltage output signal with a 220&Omega; resistor,
               and also use a low-pass filter to remove the noise. This filter only allows low frequency signals from 0Hz to its cut-off frequency (ƒc) point to pass while blocking those any higher.
-              The cuf-off frequency is calculated with the next equation:
+              The cuf-off frequency is calculated with the following equation:
              </p>
             <p>\[ƒc = {1 \over 2\pi RC}.\]</p>
 
@@ -95,9 +96,14 @@
             <p>After changing the Arduino code and tested this equation I got satisfactory results, but not perfect when considering that I want to have as much precision as possible.
               Therefore I probably have to change my circuit in order to have a lower cut-off frequency and redo all the process and the tests. 
             </p>
-            <p>Criei um launch file para processar a nuvem de pontos live</p>
-            <p>Fiz a calibração da kinect e alterei os launch files para incluir os ficheiros rgb.yaml e depth.yaml </p>
-            <p>Encontrei o centroid e a sua normal, mostrar imagem</p>
+            <font size="6"><b>Processing the point cloud</b></font>
+            <p>In this past two weeks I also calibrated the Kinect and created a launch file that runs all the necessary programs to process and visualize the point cloud acquired
+              by the Kinect live. This launch file already includes the respective .yaml files to calibrate the rgb and the depth of the sensor.</p>
+            <p>Using the recorded rosbag I continued to process the point cloud and was able to determine the centroid of a simple box and its normal. 
+              To do so I started by calculating all the normals of the entire surface and determine the center of it. Afterwards it was necessary to define which 
+              of the points of the point cloud was closer to the center of the surface and determine its corresponding normal. The visualization of the 
+              centroid and its normal is shown below.
+            </p>
             <p><img src="img/centroid.png" alt="" width="100%" height="100%"/></p>
           </div>
         </div>

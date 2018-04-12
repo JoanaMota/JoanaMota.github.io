@@ -75,10 +75,137 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
-            <p>Support for the Kinect
+
+            <font size="6"><b>Kinect</b></font>
+            
+            <p>
+              After analyzing all the positions of the Kinect on the robot, I selected the most adequate one  
+              which I believe is the position in which it as 4 degrees of freedom and its located on the side of the robot's arm. 
+              To install the Kinect in the robot it was necessary to design a support. 
+              To do so, this week I started by modeling a structure that could be screwed to one of the arms, represented below.
              </p>
-            <p><img src="img/test1view1.PNG" alt="" width="100%" height="100%"/></p>
-            <p><img src="img/test1view4.PNG" alt="" width="100%" height="100%"/></p>
+             <center>
+              <p><img src="img/test1view1.PNG" alt="" width="70%" height="70%"/></p>
+              <p><img src="img/test1view4.PNG" alt="" width="50%" height="50%"/></p>
+             </center>
+            <p>While opening the arm of the robot I noticed that there was not enough space to safely
+              drill two holes to secure the support.    
+            </p>
+            <p><img src="img/robotInterior.jpg" alt="" width="100%" height="100%"/></p>
+            <p>Therefore, another support was designed to avoid drilling the robot.
+              The final model is represented in the pictures below.
+            </p>
+            <center>
+            <p><img src="img/suportKinectAsem.PNG" alt="" width="100%" height="100%"/></p>
+            <p><img src="img/suportKinect.PNG" alt="" width="100%" height="100%"/></p>
+            </center>
+
+            <p>After the manufacture of the support the Kinect was correctly installed.</p>
+            <center>
+              <p><img src="img/supportOnRobot1.jpg" alt="" width="100%" height="100%"/>
+              </p>
+              <p>
+                <img src="img/supportOnRobot2.jpg" alt="" width="32%" height="32%"/> 
+                <img src="img/kinectOnRobot1.jpg" alt="" width="32%" height="32%"/>
+                <img src="img/kinectOnRobot2.jpg" alt="" width="32%" height="32%"/>
+              </p>
+            </center>
+            <p>Now, with the Kinect properly installed, it is fundamental to calibrate its extrinsic
+              parameters, task which I will continue to do next week. 
+               </p>
+            
+            <font size="6"><b>Robot Fanuc</b></font>
+            
+            <p>In order to know all the transformations between the coordinate systems of the Kinect, the laser sensor, 
+              the robot and the gripper, I started by including the urdf files of the Fanuc LR mate200iD to have 
+              all the coordinate frames of the joints. The referential of the base of the robot 
+              was defined as the global coordinate system. Knowing that the urdf files of the Fanuc robot dose not incorporate
+              the coordinate frame of the tool center point <a href="http://developercenter.robotstudio.com/BlobProxy/manuals/IRC5FlexPendantOpManual/doc208.html">(TCP)</a>, I had to determine the exact length of the gripper.
+              To do so, I visualized the values of the joints, and its coordinate systems, of the real robot in Rviz 
+              with the following command. 
+            </p>
+            <!-- HTML generated using hilite.me --><div style="background: #f0f0f0; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">roslaunch bin_picking robot_state_visualize.launch</pre></div>
+            <p>By moving the end effector closer to the table I was able to determine the difference in the Z axis
+              between the referencial of the the tip of the gripper and the end of the robot. This process 
+              is represented in the pictures below. 
+            </p>
+            <center>
+              <p><img src="img/testGripperReal.jpg" alt="" width="40%" height="40%"/></p>
+              <p><img src="img/testForGripper.png" alt="" width="100%" height="100%"/></p>
+            </center>
+            <p>This way the origin of the referencial of the end of the gripper was represented with an offset of 166mm.
+              Knowing this I was now able to design a simple gripper to represent the real one. By incorporating it in the urdf files
+              and the description of the last coordinate system, I could visualize the robot, the gipper in the respective position and 
+              all the coordinate systems so far, using the next command.
+              </p>
+              <!-- HTML generated using hilite.me --><div style="background: #f0f0f0; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">roslaunch bin_picking globalvisualization.launch</pre></div>
+              <center>
+                <p><img src="img/robot_rviz.gif" ></p>
+              </center>
+              
+              <p>Given the fact that it is necessary to move the robot to positions with accuracy in oder to 
+                calibrate the sensor laser and to move to the exact centroid of an object, detected by the Kinect, I
+                implemented a library developed by an ex-student. João Peixoto developed a library that allows you to communicate
+                with Fanuc robot using a TCP/IP connection and send and receive commands in the robCOMM language.    
+                By running the next command I am able to run a program that moves the robot to a desired joint or cartesian position.
+              </p>
+              <!-- HTML generated using hilite.me --><div style="background: #f0f0f0; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">rosrun fanuc_control fanuc_control</pre></div>
+              
+              <p>
+                <font size="6"><b>Laser Sensor</b></font>
+              </p>              
+            
+            <p>This week I also changed the circuit used to convert the output signal of the laser sensor with the 
+              purpose of decreasing the cut-off frequency (ƒc). I used a ƒc of 99.5Hz to filter the readings of the sensor 
+              and eliminate undesired higher frequencies. Additionally, I altered the maximum reading of the sensor to 500mm, 
+              thus forcing the readings to cover only a range of 400mm, this way having a better accuracy in the measurements
+              outputted by the device. The circuit implemented and the respective schematics represented bellow. 
+            </p>
+            <center>
+              <img src="img/circuitReal.jpg" alt="" width="35%" height="35%"/> 
+              <img src="img/filtro3.png" alt="" width="60%" height="60%"/>
+            </center>
+            <p>After redoing the entire process of gathering some analyses I obtained the next curve with the
+              respective equation.
+              </p>
+            <center>
+                <p><img src="img/SensorCurveLowPassFilter100Hz.PNG" alt="" width="100%" height="100%"/>
+                </p>
+            </center>
+            <p>This equation was implemented in the code of the Arduino and the readings obtained with it 
+              where considerably more satisfactory results. For example in a reading of 296mm the readings changed
+               between the values of 265.87mm and 296.44mm. 
+            </p>
+            <p>Now it is necessary to implement the coordinate system of the sensor in the global one, to do so 
+              I have to determine the transformation from the base of the the robot to the exact position where it 
+              has been installed. To verify if the angle of the laser is 90 degrees from the table
+              I used the robCOMM library to ensure the 5th joint
+              was exactly 90 degrees from the table and moved the robot in the Z direction. 
+              I started the movement in the position represented bellow which is 70mm from the base of the robot, where I marked the center
+              of the laser. 
+                em z: 
+                1st position --z=70mm and IMG IMG
+                2nd position --z=528m and IMG IMG
+                com uma diferença em altura de 458mm
+                variação no laser em x de ~ 4mm, será necessário fazer um melhor teste
+                </p>
+            <center>
+                <img src="img/testSensorP1.jpg" alt="" width="40%" height="40%"/> 
+                <img src="img/testSensorP1laser.jpg" alt="" width="40%" height="40%"/>
+             </center>
+            <p>The movement ended in the following position which is 528mm from the base. It is possible to notice that 
+              the laser moved more os less 4mm.
+            </p>
+            <center>
+                <img src="img/testSensorP2.jpg" alt="" width="40%" height="40%"/>
+                <img src="img/testSensorP2laser.jpg" alt="" width="40%" height="40%"/>
+            </center>
+            <p>Next I have to correctly determine the transformation from the point of the gripper to laser 
+              in the X, Y and Z dirrections.
+            </p>      
+            <center>
+                <img src="img/testSensorXY.jpg" alt="" width="40%" height="40%"/>
+            </center>
           </div>
         </div>
       </div>

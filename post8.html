@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Joana Mota - Master Thesis Blog</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/clean-blog.min.css" rel="stylesheet">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML" async>
+</script>
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Joana Mota</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('img/week.png')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="post-heading">
+              <h1>Week 8 </h1>
+              <h2 class="subheading">Support for the Kinect. Changes on the circuit to filter the laser sensor readings. Beginning of the calibration of all the hardware utilized.</h2>
+              <span class="meta">Posted by
+                <a href="about.html">Joana Mota</a>
+                on April 19, 2018</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+
+            <font size="6"><b>Laser Sensor</b></font>
+            <p>    mas ainda nao estou a aproveitar a gama total de 0V-5V da entrada no arduino
+              por isso é preciso mudar a resistencia de 220ohm para 2250ohm e que sejam resistências com 
+              precisão de 1%.
+              definido max 500mm e min 100mm terá 400mm/1024bit= 0.4mm/bit
+              - mostrar os desvios que pode ter
+
+              IMAG Circuito e Esquema
+          
+
+            Calibração
+
+            sabendo que quando meto o robot na posição de saber o comprimento do gripper
+            o ultimo seistema de coordenadas está quase com zero em Z por isso a leitura do SENSOR
+            1D dá me a diferença da ponta para o sensor em z, vito que ele nao lê nada a menos de 100 mm
+            subi a ponta um bocado e assim posso ver na mesma que a ponta está a uma distancia da base em z
+            e comparar a leitura do sensor
+
+            lido no dispositivo tenho:
+            250mm
+            lido na porta serie tenho:
+            250.21mm
+            250.78mm
+
+            mean= 250.495
+
+            o ultimo sistema de coordenadas está com a ponta a 0,186714m visto no Rviz
+            186,714mm
+
+            Diferença de:
+            63.781mm 
+
+            vou tirar mais valores e fazer uma media---tabela no excell
+            A Média da Diferença em Z é:
+            63.6mm
+
+            depois para calibrar o x e o Y tirei a ponta do griper e coloquei um lapis e medi a diferença
+            em ambas as direções do feixe laser á ponta do lapis:
+
+            tenho uma diferença em x de = 47.8mm
+                                em y de = 16.6mm
+
+            IMAG CALIBRAR X e Y
+
+            criei uma macro para o sensor com o referencial na origem de onde sai o feixe laser com estas transformações
+            incorporei o stl do sensor com as respectivas trasnformaçoes para estar coincidente com o referencial
+            IMAG RVIZ com o sensor 
+            </p>
+            <font size="6"><b>Kinect</b></font>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <!-- <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li> -->
+              <li class="list-inline-item">
+                <a href="https://www.facebook.com/joana.mota.9279">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/JoanaMota/Bin-picking">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+            <p class="copyright text-muted">Copyright &copy; Your Website 2018</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/clean-blog.min.js"></script>
+
+  </body>
+
+</html>

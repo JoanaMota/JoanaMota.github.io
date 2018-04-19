@@ -111,7 +111,8 @@
               the coordinate system of the tip of the gripper to the coordinate system of the sender of the laser.
               The process of determining if the angle of the sensor changes with the perpendicular movement of the robot's 
               end effector was redone with more precision. When moving the end effector 518.39mm the laser moved 5.5mm, 
-              this represents that the laser shifts 0.6 degrees when it moves from 64mm to 580mm in relation to the table. Afterwards the translation
+              this represents that the laser shifts 0.6 degrees when it moves from 64mm to 580mm in relation to the table.
+              This offset is less than 1 degree so it's not going to be taken into account, at least for now. Afterwards the translation
               of the X,Y and Z was calculated. To calculate the exact diference from the tip of the gripper to the laser in the Z axis
               I gathered some readings from the laser when it is vertically pointing to the table, thus knowing the difference to the base 
               of the robot. Then those where compared with the z-coordinate of the end effector read in the RVIZ. After gathering data

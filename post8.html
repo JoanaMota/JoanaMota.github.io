@@ -60,7 +60,7 @@
           <div class="col-lg-8 col-md-10 mx-auto">
             <div class="post-heading">
               <h1>Week 8 </h1>
-              <h2 class="subheading">Support for the Kinect. Changes on the circuit to filter the laser sensor readings. Beginning of the calibration of all the hardware utilized.</h2>
+              <h2 class="subheading">Calibration of the Kinect and the laser sensor.</h2>
               <span class="meta">Posted by
                 <a href="about.html">Joana Mota</a>
                 on April 19, 2018</span>
@@ -76,55 +76,137 @@
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
 
-            <font size="6"><b>Laser Sensor</b></font>
-            <p>    mas ainda nao estou a aproveitar a gama total de 0V-5V da entrada no arduino
-              por isso é preciso mudar a resistencia de 220ohm para 2250ohm e que sejam resistências com 
-              precisão de 1%.
-              definido max 500mm e min 100mm terá 400mm/1024bit= 0.4mm/bit
-              - mostrar os desvios que pode ter
+            <font size="7"><b>Laser Sensor</b></font>
+            <p>Until now I have been using a 220&Omega; resistor to convert the current signal to voltage, but since 
+              the Arduino UNO has an operating voltage of 5V I calculated the appropriate
+              resistor to use the entire range, to do so I used the maximum current of the sensor(20mA). </p>
+            <p>\[R = {5V \over 0.02A} = 250&Omega; .\]</p>
 
-              IMAG Circuito e Esquema
-          
-
-            Calibração
-
-            sabendo que quando meto o robot na posição de saber o comprimento do gripper
-            o ultimo seistema de coordenadas está quase com zero em Z por isso a leitura do SENSOR
-            1D dá me a diferença da ponta para o sensor em z, vito que ele nao lê nada a menos de 100 mm
-            subi a ponta um bocado e assim posso ver na mesma que a ponta está a uma distancia da base em z
-            e comparar a leitura do sensor
-
-            lido no dispositivo tenho:
-            250mm
-            lido na porta serie tenho:
-            250.21mm
-            250.78mm
-
-            mean= 250.495
-
-            o ultimo sistema de coordenadas está com a ponta a 0,186714m visto no Rviz
-            186,714mm
-
-            Diferença de:
-            63.781mm 
-
-            vou tirar mais valores e fazer uma media---tabela no excell
-            A Média da Diferença em Z é:
-            63.6mm
-
-            depois para calibrar o x e o Y tirei a ponta do griper e coloquei um lapis e medi a diferença
-            em ambas as direções do feixe laser á ponta do lapis:
-
-            tenho uma diferença em x de = 47.8mm
-                                em y de = 16.6mm
-
-            IMAG CALIBRAR X e Y
-
-            criei uma macro para o sensor com o referencial na origem de onde sai o feixe laser com estas transformações
-            incorporei o stl do sensor com as respectivas trasnformaçoes para estar coincidente com o referencial
-            IMAG RVIZ com o sensor 
+            <p>Knowing this the circuit was changed to include a resistor of 250&Omega; .               
             </p>
-            <font size="6"><b>Kinect</b></font>
+            <center>
+              <p><img src="img/circuit_99,5Hz_250.jpeg" alt="" width="45%" height="45%"/>
+              <img src="img/circuit250.png" alt="" width="50%" height="50%"/></p>
+            </center>
+            <p>
+              Once again the entire process of gathering some analyses was redone and the next curve was acquired with the respective equation.
+            </p>
+            <center>
+              <p><img src="img/SensorCurveLowPassFilter100Hz_250.png" alt="" width="100%" height="100%"/>
+              </p>
+            </center>
+            <p>The Arduino UNO has analogue inputs of 10 bits which allows a resolution of 1024 values, and since 
+              the sensor was limited to a minimum of 100mm and a maximum of 500mm each value will represente a variation of 0.4mm.
+              Having this in mind the new circuit was tested and the results where satisfactory once again. However, the 
+              readings did not improved because 
+              they continue to oscillate between two values with a diference of 0.57mm. For example when measuring 250mm with 
+              the sensor the Arduino readings changed between the values of 250.21mm and 250.78mm. This can be explained
+              whit the fact that the sensor has a resolution analog output of 12 bits losing this way 2 bits when entering
+              the Arduino.
+            </p>
+
+            <font size="5"><b>Calibração</b></font>
+            <p>
+              The calibration of the laser sensor was carried on with the determination of the transformation from 
+              the coordinate system of the tip of the gripper to the coordinate system of the sender of the laser.
+              The process of determining if the angle of the sensor changes with the perpendicular movement of the robot's 
+              end effector was redone with more precision. When moving the end effector 518.39mm the laser moved 5.5mm, 
+              this represents that the laser shifts 0.6 degrees when it moves from 64mm to 580mm in relation to the table. Afterwards the translation
+              of the X,Y and Z was calculated. To calculate the exact diference from the tip of the gripper to the laser in the Z axis
+              I gathered some readings from the laser when it is vertically pointing to the table, thus knowing the difference to the base 
+              of the robot. Then those where compared with the z-coordinate of the end effector read in the RVIZ. After gathering data
+              for different distances the average was calculated, hence having a 63.6mm diference from the sender of the laser to the 
+              tip of the gripper. In order to calculate the translation in the X and Y directions the gripper was replaced by a pencil 
+              and the difference to the laser beam was evaluated.</p>
+            <center>
+              <p><img src="img/calibration_pencil_sensor2.jpg" alt="" width="30%" height="30%"/>
+                <img src="img/calibration_pencil_sensor.jpg" alt="" width="30%" height="30%"/>
+              </p>
+            </center>
+            </p>
+            <p>
+              In the picture below it is possible to see that there is a difference of 47.8mm and 16.6mm in the X and Y direction, respectively.  
+            </p>
+            <center>
+              <p><img src="img/calibration_sensor_xy.jpg" alt="" width="45%" height="45%"/>
+              </p>
+            </center>
+
+            <p> 
+              Having already the transformation the URDF was changed, by altering the binpicking_robot_macro.xacro file and adding the 
+              binpicking_gripper_macro.xacro, in order to incorporate the 
+              coordinate system of the sender of the laser sensor. The STL of the device was also included for a better visualization.
+            </p>
+            <center>
+              <p>
+                <img src="img/sensorReferencial.png" alt="" width="45%" height="45%"/>
+                <img src="img/sensorReferencial2.png" alt="" width="45%" height="45%"/>
+              </p>
+             </center>
+            <font size="7"><b>Kinect</b></font>
+             <p>
+              The calibration of the Kinect was my next step this week. To do so the  
+              <a href="http://wiki.ros.org/visp_hand2eye_calibration">visp_hand2eye_calibration ROS package</a>
+              was used. This package is used to estimate the camera position with respect to its effector (the robot arm)
+              using the ViSP library. To compute the relative transformation between the the camera and the hand it is necessary
+              to fed the calibrator node with the /world_effector and the /camera_object transformations. This last one 
+              is calculated using an aruco and the    
+              <a href="http://wiki.ros.org/aruco_detect">aruco_detect</a> package which detects the pose of aruco markers, which 
+              can be visualized in the picture below.
+            </p>
+            <center>
+             <p><img src="img/calibration_aruco_detect.png" alt="" width="55%" height="55%"/>
+             </p>
+            </center>
+            <p>
+              To use this package it is necessary to install the fiducial software from binary packages using the 
+              following command.
+            </p>
+            <p>
+              <div style="background: #f0f0f0; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">sudo apt-get install ros-kinetic-fiducials</pre></div>
+            </p>  
+            <p>
+              This calibration process is easily visualized in the scheme bellow.
+            </p>
+              <center>
+              <p><img src="img/transformations_robot_Kinect.png" alt="" width="80%" height="80%"/>
+              </p>
+            </center>
+            <p>
+              For this calibration to work, the creation of a client, which feeds different 
+              transformations to the calibrator responsible of computing the relative 
+              transformation between the the camera and the hand from a few poses, is fundamental. The camera_calibration_client.py program,
+              present in the <i>calibration</i> file, is responsible for executing this process and printing the /effector_camera transformation
+              in the xyz(transformation) and rpy(rotation) format. With this it is possible to visualize the tree of the transformations 
+              of the entire system.
+              </p>
+              <center>
+                <p><img src="img/frames_tree.png" alt="" width="90%" height="90%"/>
+                </p>
+              </center>
+              <p>
+                In order to visualize the robot, the Kinect, the laser sensor and all the associated coordinate systems, the URDF model
+                of the entire system was changed, by altering the binpicking_macro.xacro file to incorporate the Kinect. 
+                All the components can be visualized and analysed live by running the next command.
+              </p>
+              <p>
+                <div style="background: #f0f0f0; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%">roslaunch bin_picking global_state_visualize.launch</pre></div>
+              </p> 
+            <center>
+              <p><img src="img/global_state2.gif" alt="" width="55%" height="55%"/>
+              </p>
+            </center>
+
+            <p>
+              While using the RobComm language to send commands to move the robot, I observed that the origin in the base_link
+              differs from the one visualized in RVIZ with the URDF of the FANUC robot. Besides the X and Y coordinate being almost
+              the same, the z-coordinate has a gap of 162.5mm. Hence, when moving the robot to a desired point I will have to take in 
+              consideration this aspect.
+            </p>
+            <center>
+              <p><img src="img/robcommADNfanuc.png" alt="" width="110%" height="110%"/>
+              </p>
+            </center>
           </div>
         </div>
       </div>

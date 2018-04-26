@@ -75,7 +75,9 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
-
+            <p>Having now calibrated all the hardware it was now possible to acquire point clouds with the Kinect in the 
+              correct position. 
+            </p>
             <font size="7"><b>Point Clouds</b></font>
             <p>Central Position</p>
             <center>
@@ -83,16 +85,35 @@
                 </p>
               </center>
             <center>
-              The 4 quadrants
+              The 4 quadrants of the table:
               <p>
                 <img src="img/ping_piece_block_lb.png" alt="" width="46%" height="46%"/>
                 <img src="img/ping_piece_block_rb.png" alt="" width="47%" height="47%"/>
                 <img src="img/ping_piece_block_lf.png" alt="" width="46%" height="46%"/>
                 <img src="img/ping_piece_block_rf.png" alt="" width="47%" height="47%"/>
-                <img src="img/centroid_normal.png" alt="" width="47%" height="47%"/>
-                <img src="img/centroid_normal2.png" alt="" width="47%" height="47%"/>
               </p>
             </center>
+              <p>
+                After recording some rosbags with different objects on the table I continued the segmentation of the point clouds.
+                I started by using a PassThrough filter to filter along a specified dimension, thus removing points that don't belong to
+                the table and to remove the base of the robot. To identify and remove the table, in order to keep only the objects,
+                the SACSegmentation and the ExtractIndices filters were used. The clustering method used to separate and extract the objects
+                was the Euclidean Cluster Extraction with the pcl::EuclideanClusterExtraction class. This process uses a plane segmentation 
+                algorithm which is correctly explained  <a href="http://www.pointclouds.org/documentation/tutorials/planar_segmentation.php#planar-segmentation">here</a>
+                and the steps of the process are explained 
+                <a href="http://www.pointclouds.org/documentation/tutorials/cluster_extraction.php">here</a>.
+                Having now all the objects separated, each centroid and normal was calculated. To do so, the center of each surface was calculated
+                and the point of the point cloud that is closer to the center was determined. Afterwards, the normals of all the points were calculated
+                and the normal of the center point was the one selected using its index.
+                In the pictures below it is possible to visualize the clusters of the objects with their corresponding centroids and normals.
+              </p>
+
+              <center>
+                <p><img src="img/centroid_normal.png" alt="" width="50%" height="50%"/>
+                <img src="img/centroid_normal2.png" alt="" width="40%" height="40%"/>
+                </p>
+              </center>
+
           </div>
         </div>
       </div>

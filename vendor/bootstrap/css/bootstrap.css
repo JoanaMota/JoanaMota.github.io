@@ -563,6 +563,25 @@ pre code {
   margin-left: auto;
 }
 
+/* .affix {
+  top: 50px;
+  z-index: 9999 !important;
+}
+
+@media (min-width: 1200px) {
+  .affix {
+    width: 263px;
+  }         
+} */
+
+/* @media (min-width: 768px) { 
+  .img-responsive.mapimg{
+    max-width:400px;
+    
+  }
+  
+} */
+
 @media (min-width: 576px) {
   .container {
     max-width: 540px;
@@ -7333,6 +7352,8 @@ button.bg-dark:focus {
   left: 0;
   z-index: 1030;
 }
+
+
 
 @supports ((position: -webkit-sticky) or (position: sticky)) {
   .sticky-top {

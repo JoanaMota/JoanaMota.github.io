@@ -14,15 +14,60 @@
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+      
+      <!-- Custom fonts for this template -->
+      <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+      <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+      <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+      
 
-    <!-- Custom fonts for this template -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 
-    <!-- Custom styles for this template -->
-    <link href="css/clean-blog.min.css" rel="stylesheet">
+    <style>
+      /* Note: Try to remove the following lines to see the effect of CSS positioning */
+      /* .affix {
+          top: 0;
+          width: 100%;
+          z-index: 9999 !important;
+      }
+    
+      .affix + .container-fluid {
+          padding-top: 70px;
+      } */
 
+      .fixed-bottom2 {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 100;
+      }
+
+      .affix {
+        top: 20;
+        width: 100%;
+        color: red;
+        z-index: 9999 !important;
+      }
+
+      .block {
+        position: fixed;
+        background: #2184cd;
+        color: rgb(224, 20, 20);
+        padding: 20px;
+        width: 400px;
+      }
+
+      .element {
+        position: sticky; 
+        top: 80px;
+      }
+    </style>
+      <!-- Custom styles for this template -->
+      <link href="css/clean-blog.min.css" rel="stylesheet">
   </head>
 
   <body>
@@ -70,12 +115,25 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-            <h2 class="section-heading">Bin-picking with precision using a 3D Sensor and a 1D Laser Sensor</h2>
+            <h2 class="section-heading">Precise Bin-picking using a 3D Sensor and a 1D Laser Sensor</h2>
           <p>Bin-picking is the name of the technique used by a robot to grasp objects that are randomly disposed inside a box or on a pallet.</p>
           <p>My purpose with this thesis is to develop a solution for a different process of bin-picking using a 3D sensor to generate a point cloud of the objects, and a 1D laser sensor to correctly determinate the exact coordinates of the grasping point.</p>
         </div>
       </div>
     </div>
+
+   
+
+    <!-- <div class="affix">
+        JOANANA
+    </div>
+    <nav class="fixed-bottom2" >
+        <div class="container">
+            <iframe width="650" height="340"
+          src="https://www.youtube.com/embed/8bcPk6gX0Rg?autoplay=1">
+          </iframe> 
+        </div>
+    </nav> -->
 
     <!-- Main Content -->
     <div class="container-fluid">
@@ -257,9 +315,14 @@
           </div>
         </div>
         <div class="col-sm-6" style="background-color:rgba(243, 226, 38, 0.099);">
-            <iframe width="650" height="340"
-            src="https://www.youtube.com/embed/8bcPk6gX0Rg?autoplay=1">
-            </iframe> 
+            <div class="element">
+                <h2 class="post-title">
+                  Demonstration of the developed Bin-picking process.
+                </h2>
+                <iframe width="650" height="340"
+                 src="https://www.youtube.com/embed/8bcPk6gX0Rg?autoplay=1">
+                 </iframe> 
+           </div>
         </div>
       </div>
     </div>

@@ -175,14 +175,14 @@
             </center>
             <p>
               For this calibration to work, the creation of a client, which feeds different 
-              transformations to the calibrator responsible of computing the relative 
+              transformations to the calibrator responsible for computing the relative 
               transformation between the the camera and the hand from a few poses, is fundamental. The camera_calibration_client.py program,
               present in the <i>calibration</i> file, is responsible for executing this process and printing the /effector_camera transformation
               in the xyz(transformation) and rpy(rotation) format. With this it is possible to visualize the tree of the transformations 
               of the entire system.
               </p>
               <center>
-                <p><img src="img/frames_tree.png" alt="" width="90%" height="90%"/>
+                <p><img src="img/frames_tree2.png" alt="" width="90%" height="90%"/>
                 </p>
               </center>
               <p>
@@ -202,7 +202,7 @@
               While using the RobComm language to send commands to move the robot, I observed that the origin in the base_link
               differs from the one visualized in RVIZ with the URDF of the FANUC robot. Besides the X and Y coordinate being almost
               the same, the Z-coordinate has a gap of 162.5mm. Hence, when moving the robot to a desired point I will have to take this aspect
-              into consideration.
+              into consideration, when using the RobComm language.
             </p>
             <center>
               <p><img src="img/robcommADNfanuc.png" alt="" width="110%" height="110%"/>

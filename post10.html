@@ -60,7 +60,7 @@
           <div class="col-lg-8 col-md-10 mx-auto">
             <div class="post-heading">
               <h1>Week 10 </h1>
-              <h2 class="subheading">Conjunction of the point cloud information with the robot movements.</h2>
+              <h2 class="subheading">Evaluation of the Kinect calibration.</h2>
               <span class="meta">Posted by
                 <a href="about.html">Joana Mota</a>
                 on May 2, 2018</span>
@@ -75,11 +75,11 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
-            <p>Having now the centroids of the objects in relation to the camera, I run some tests to see if the end effector of the robot
+            <p>Having now the centroids of the objects in relation to the camera, some tests were performed   to evaluate if the end effector of the robot
               moved to the centroid of the real objects, using the robCOMM language. To do so the node pointTFtransfer was created. Whereas, the node objDetection publishes 
-              the centroid of the objects and it's normal in relation to the tf /camera_rgb_optical_frame, in the /centroid_in_robot_base and 
-              /normal_in_robot_base topics, respectively, the node pointTFtransfer subscribes This node also transforms the coordinates to be in relation to the 
-              /robot_base_link coordinate system. This were the first tests.
+              the centroid of the objects and it's normal in relation to the frame of the Kinect, in the /centroid_in_robot_base and 
+              /normal_in_robot_base topics, respectively, the node pointTFtransfer subscribes to them and transforms the coordinates to be in relation to the 
+              global. This were the first tests.
             </p>
             <font size="5"><b>Test 1 to catch the yellow piece.</b></font>
             <center>

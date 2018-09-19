@@ -75,8 +75,8 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-10 mx-auto">
-            <p>Having now calibrated all the hardware it was now possible to acquire point clouds with the Kinect in the 
-              correct position. 
+            <p>Having all the hardware correctly calibrated, and being already capable of acquiring Kinect
+              data, the next important step is post-processing the "registered" point cloud. 
             </p>
             <font size="7"><b>Point Clouds</b></font>
             <p>Central Position</p>
@@ -93,26 +93,126 @@
                 <img src="img/ping_piece_block_rf.png" alt="" width="47%" height="47%"/>
               </p>
             </center>
-              <p>
-                After recording some rosbags with different objects on the table I continued the segmentation of the point clouds.
-                I started by using a PassThrough filter to filter along a specified dimension, thus removing points that don't belong to
-                the table and to remove the base of the robot. To identify and remove the table, in order to keep only the objects,
-                the SACSegmentation and the ExtractIndices filters were used. The clustering method used to separate and extract the objects
-                was the Euclidean Cluster Extraction with the pcl::EuclideanClusterExtraction class. This process uses a plane segmentation 
-                algorithm which is correctly explained  <a href="http://www.pointclouds.org/documentation/tutorials/planar_segmentation.php#planar-segmentation">here</a>
-                and the steps of the process are explained 
-                <a href="http://www.pointclouds.org/documentation/tutorials/cluster_extraction.php">here</a>.
-                Having now all the objects separated, each centroid and normal was calculated. To do so, the center of each surface was calculated
-                and the point of the point cloud that is closer to the center was determined. Afterwards, the normals of all the points were calculated
-                and the normal of the center point was the one selected using its index.
-                In the pictures below it is possible to visualize the clusters of the objects with their corresponding centroids and normals.
-              </p>
+            <p>
+              The point cloud used to develop this process was recorded into a bag through the ros-
+              bag package, so that the code could be written and tested without being always connected
+              to the Kinect sensor. The recorded scene was the one presented in the next picture, together with the corresponding point cloud.
+            </p>
+            <table style="width:100%">
+                <tr>
+                    <th rowspan="2"><img src="img/PCinicialRealRobot.jpg" alt="" width="100%" height="98%"/></th>
+                    <td><img src="img/PCinit.png" alt="" width="100%" height="70%"/></td>
+                  </tr>
+                  <tr>
+                    <td><img src="img/PCinit2.png" alt="" width="100%" height="30%"/></td>
+                  </tr>
+            </table>
+            <p>
+                The steps of the process used to acquire the centroid and normal information of each object
+                are listed below:
+            </p>
+            <ol>
+              <li>Removal of undesired points from the point cloud, such as, points on the floor or points
+                  that represent the robot’s base;</li>
+              <li>Identification and removal of points from the table where the objects lay;</li>
+              <li>Clustering of the point cloud to separate the different objects;</li>
+              <li>Determination of the centroid and normal for each cluster.</li>
+            </ol>    
+            <p>
+                The objDetection.cpp program, contained in the source file of the project, was created
+                to subscribe to the <em>/camera/depth_registered/points</em> (XYZRGB) topic published by the
+                Kinect, invoking a callback function whenever a new message arrives to this topic. This
+                function is the one responsible for processing the data, publishing and presenting the results.
+            </p>   
+            <p><font size="5"><b>1 - Extraction of outliers and filtering</b></font></p>
+            <p>
+                The points which were far away from the camera, i.e., a more than 0.9 meters, along the
+                Z direction were removed, thus removing the points beyond the table. The filter used to do this was the PassThrough. Since the process of
+                acquiring the point cloud of the workspace will always be done with the manipulator in the
+                same respective position, the range in the X direction necessary to remove the points from the
+                robot’s base will always be the same.
+            </p>
+            <p>
+                The filter used to reduce the number of points is called VoxelGrid. This filter is used to
+                simplify the cloud, by wrapping the point cloud with a three-dimensional grid and reducing
+                the number of points to the center points within each block of the grid. The point
+                cloud resulting from this type of filter is presented bellow.
+            </p>
+            <center>
+                <img src="img/PCvg.png" alt="" width="50%" height="50%"/>
+            </center>
 
-              <center>
-                <p><img src="img/centroid_normal.png" alt="" width="50%" height="50%"/>
-                <img src="img/centroid_normal2.png" alt="" width="40%" height="40%"/>
-                </p>
-              </center>
+            <p><font size="5"><b>2 - Extraction of the background</b></font></p>
+            <p>
+                The next step consists of identifying and removing the background formed by the table,
+                thus leaving only the part of the point cloud that represents the objects to grab. In order to
+                identify the table, the SACSegmentation class does a simple segmentation of a set of points
+                with the purpose of finding the dominant plane in a scene. After removing those points in the background it was noticeable that not all points from the table were correctly removed. In order to remove these isolated
+                points the RadiusOutlierRemoval filter was used.
+            </p>
+            <p>
+                The point cloud that results from this filter is presented in following figure and it is possible to see that the only points now in the resulting point cloud belong to a
+                specific object.
+            </p>
+            <center>
+                <img src="img/PCradius.png" alt="" width="50%" height="50%"/>
+            </center>
+            <p><font size="5"><b>3 - Clustering</b></font></p>
+            <p>
+                Having only the points that represent the objects to grab, the following step is to split
+                them in different point clouds, each one representing a specific object. The clustering method
+                used to separate and extract the objects was the Euclidean Cluster Extraction with the
+                pcl::EuclideanClusterExtraction class. This process uses a plane segmentation algorithm to
+                identify different surfaces, which is the same as the one used in the identification of the
+                background, in the previous section. This clustering method is only used to separate different
+                objects that are not in close contact with each other; in that case another class has to be used,
+                for example the pcl::RegionGrowing explained <a href="http://pointclouds.org/documentation/tutorials/region_growing_segmentation.php">here</a> .
+            </p>
+            <p>
+              The next figure shows the different clusters, each with a distinct color, in one viewer.
+            </p>
+            <center>
+                <img src="img/PCcluster.png" alt="" width="50%" height="50%"/>
+            </center>
+            <p><font size="5"><b>4 - Calculation of each Centroid and Normal</b></font></p>
+            <ol type="i">
+              <li>Firstly, the normals of all of the points of a cluster are computed using the NormalEsti-
+                  mation class;</li>
+              <li>The second main step consists of computing the center of the surface, which will be
+                  referred to as the virtual centroid since it does not represent a point of the surface but
+                  rather the central point of all the surface’s points;</li>
+              <li>Having the virtual centroid of the surface, the index of the cluster’s point which is closer
+                  to this virtual centroid was then determined;</li>
+              <li>The index of the point which has the shortest distance to the virtual centroid can be now
+                  used to determine the centroid of the object’s surface. This virtual centroid computed in
+                  <em>ii</em> can not be used as the grasping point because, for curved surfaces like the ones obtained
+                  with the ping pong balls, this centroid will be below the interior surface instead of above
+                  the external surface. This is better visualized in the next figure in which the white point
+                  represents the virtual centroid and the red one represents the centroid of the surface
+                  which will be later the grasping point after some adjustments with the laser sensor
+                  measurement.</li>
+
+                  <center>
+                      <img src="img/virtualCentroid.png" alt="" width="50%" height="50%"/>
+                  </center>
+              <li>Lastly, the normal of the surface’s centroid was also determined from all of the normals
+                  computed in <em>i</em> through the index of the point with the shortest distance to the virtual
+                  centroid.</li>
+            </ol> 
+            <p>
+              The next figure presentes a representation of the object’s centroid and its normals in the initial point cloud.
+            </p>
+
+            <center>
+                <img src="img/PCfinal.png" alt="" width="50%" height="50%"/>
+            </center>
+            <p>
+                The centroid and its normal of the first clustered object were published in the topics
+                <em>/cloud_centroid</em> and <em>/cloud_centroid_normal</em> respectively. These have their coordinates
+                in relation to the tf <em>/camera_rgb_optical_frame</em>, which is one of the frames of the Kinect
+                sensor, and will be later transformed to be in relation to the <em>/robot_base_link</em> frame of the
+                manipulator, for future manipulation.
+            </p>
 
               <!-- Pager -->
           <div class="clearfix">

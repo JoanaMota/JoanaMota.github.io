@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Joana Mota - Master Thesis Blog</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="css/clean-blog.min.css" rel="stylesheet">
+    <script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML" async>
+</script>
+
+  <style>
+    .element {
+      position: sticky; 
+      top: 65px;
+    }
+  </style>
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Joana Mota</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          Menu
+          <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('img/week.png')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="post-heading">
+              <h1>Week 16 </h1>
+              <h2 class="subheading">Tests.</h2>
+              <span class="meta">Posted by
+                <a href="about.html">Joana Mota</a>
+                on September 19, 2018</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto" style="margin-bottom:2cm;" >
+            <p>
+                In order to evaluate and demonstrate the performance of the developed bin-picking process,
+                several tests were taken and a demonstration was held to present the versatility of the system.
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="container-fluid" style="margin-bottom:2cm;">
+        <div class="row">
+          <div class="col-sm-5" style="background-color:rgba(0,128,128, 0.099);">
+                <div class="element">
+                    <center>
+                        <h2 class="post-title">
+                            Small cylindrical pieces
+                        </h2>
+                        <img src="img/test1in.jpg" alt="" width="50%" height="50%"/> 
+                    </center>
+                </div>
+          </div>
+          <div class="col-lg-7 col-md-8 mx-auto" style="background-color:rgba(255, 255, 0, 0.099);">
+            <p>
+                The objects used in the first test were small cylindrical pieces, with a diameter of 37mm. By using these small objects, it is possible to check the precision
+                and accuracy of the process. Some of the pieces were placed in the workspace table with a
+                inclination to force the manipulator to position itself with different Euler angles.
+            </p>
+            <p> 
+              In the 20 tested pieces 6 of them were not successfully grabbed, which represents a percentage of success of 70%. This low percentage is caused by several easily visible problems: 
+            </p>
+                <ul>
+                  <li>Surface's Normal</li>
+                  <p>
+                      One cause of error is in the determination of the surface’s normal, which sometimes is not
+                      properly computed. By positioning the end effector with the Euler angles computed with the
+                      wrong surface’s normal, the suction cup will not be parallel to the object’s surface, thus not
+                      allowing the object to be gripped, as in figure <b>1a</b>.
+                    </p>
+                    
+                  <li>Centroid</li>
+                  <p>
+                    Since the Kinect has a low precision,
+                    the centroid’s coordinates can vary up to 3mm from the correct centroid. In this specific test, this error
+                    was not one of the reasons for not catching those 6 pieces, however the piece in figure <b>1b</b>
+                    was almost not grabbed because of this, which means that objects smaller than the ones used
+                    in this test could have failed more often because of this flaw.
+                  </p>
+                  <li>Laser Sensor Readings</li>
+                  <p>
+                      The main cause of error in the picking of objects derives from the oscillation
+                      in the laser sensor readings. This, then, can cause two opposite situations, the tool tip could
+                      be too far from the object when grabbing it, as in figure <b>1c</b>, but also too close, as in figure
+                      <b>1d</b>. The piece in the last case was obviously grabbed but if it had been a more fragile object
+                      it could have broken it.
+                  </p>
+                  <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test1NormalCROP2.jpg" style="width: 100%">1a</p>
+                  <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test1KinectCentCROP2.jpg" style="width: 100%">1b</p>
+                  <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test1LReading-CROP2.jpg" style="width: 100%">1c</p>
+                  <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test1LReading+CROP2.jpg" style="width: 100%">1d</p>
+                  <p style="clear: both;"></p>
+                </ul> 
+          </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-sm-5" style="background-color:rgba(0,128,128, 0.099);">
+                  <div class="element">
+                      <center>
+                          <h2 class="post-title">
+                              Ping Pong Balls
+                          </h2>
+                          <img src="img/test2.jpg" alt="" width="50%" height="50%"/> 
+                      </center>
+                  </div>
+            </div>
+            <div class="col-lg-7 col-md-8 mx-auto" style="background-color:rgba(255, 255, 0, 0.099);">
+                <p>
+                  In the second test, the objects used were ping pong balls. With this test it is possible
+                  to demonstrate the versatility of this process by having the capability of grabbing objects
+                  with curved surfaces. The process held in the first test was
+                  replicated four times with the ping pong balls since there were only 5 balls to pick, thus having
+                  also a sampling of 20 objects for the experiment.
+                </p>
+                <p> 
+                  Coincidentally, in the second trial, 6 ping pong balls were also not grabbed. However, in
+                  this case, the main cause of error resulted from the incorrect determination of the surface’s
+                  normal. This is explained by the fact that normal vectors in curved surfaces vary along the
+                  object’s surface, unlike flat surfaces in which the normal vectors have all almost the same
+                  orientation. From the 6 pieces not grabbed, 3 of them occurred because of this specific issue,
+                  like the one in figure <b>2a</b> . Nevertheless, in other times the surface’s normal was poorly
+                  determined but since the tool tip got close enough to the surface, the gripper was able to grab
+                  the object, as in the case presented in figure <b>2b</b>.
+                  The other two issues observed in the first trial were, as expected, also reported in this
+                  second experiment. One object was not grabbed because of the incorrect determination of
+                  the object’s centroid, presented in figure <b>2c</b>, and the other 2 were due to the incorrect
+                  measurement of the distance with the laser sensor, as in figure <b>2d</b>.
+                </p>
+                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test2Normal2.jpg" style="width: 100%">2a</p>
+                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test2normal2.jpg" style="width: 100%">2b</p>
+                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test2kinectCent2.jpg" style="width: 100%">2c</p>
+                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test2farAway2.jpg" style="width: 100%">2d</p>
+                <p style="clear: both;"></p>
+              </div>
+          </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto" style="margin-bottom:2cm;" >
+            <p>
+              In order to solve the errors in the laser sensor’s readings, firstly, the Arduino, the circuit
+              and all the connections, used to receive and interpret the sensor’s output, were placed in a
+              box, thus protecting all the connections.
+            </p>
+            <center>
+              <img src="img/ControlUnit.png" alt="" width="30%" height="50%"/>
+            </center>
+            <p>
+              Afterwards the laser sensor was
+            re-calibrated with another process to ensure that the calibration curve, that links the sensor’s
+            distance displayed in its monitor and the reading received by the Arduino, was as precise as
+            possible. Since the laser sensor was now attached to the manipulator, contrarily to the first
+            time calibrating, it was possible to use the robot’s accuracy to preform a better calibration.
+            This time the calibration was held not only with the sensor’s distance displayed in its monitor
+            but also with the exact position of the robot’s end effector. So, two linear regressions were
+            then computed to evaluate the relation between both these informations with the readings
+            received by the Arduino. Both curves are presented in the following figure. Through the Z coordinate of
+            the robot’s end effector it is possible to ensure that the collected data is always equally spaced,
+            thus obtaining a more precise slope for the calibration curve. Therefore, the equation that
+            converts the reading to a distance was altered to include the scope of the linear regression that
+            uses the end effector’s coordinates (blue curve in the figure) and the intercept of the curve that
+            uses the distance displayed in the sensor’s monitor (red curve in the figure). Consequently the
+            Arduino’s code was changed and uploaded.
+            </p>
+            <center>
+              <img src="img/curves.png" alt="" width="90%" height="120%"/>
+            </center>
+          </div>
+        </div>
+      </div>
+      <div class="container-fluid" style="margin-bottom:2cm;">
+        <div class="row">
+          <div class="col-sm-5" style="background-color:rgba(0,128,128, 0.099);">
+                <div class="element">
+                    <center>
+                        <h2 class="post-title">
+                            Eggs
+                        </h2>
+                        <img src="img/test3.jpg" alt="" width="50%" height="50%"/> 
+                    </center>
+                </div>
+          </div>
+          <div class="col-lg-7 col-md-8 mx-auto" style="background-color:rgba(255, 255, 0, 0.099);">
+            <p>
+              After the alteration in the laser sensor’s calibration curve a third test was conducted. In
+              this third trial the objects used were eggs, thus demonstrating that this process is sufficiently
+              precise to grab fragile objects without deforming or breaking them. The eggs used were
+              previously emptied in order to prevent the egg’s content to enter the pipes with compressed
+              air, used for the suction, in case of breaking. Consequently, by using empty eggs these will be
+              even more fragile and harder to grab without breaking. In third trial the procedure used in the second trial was replicated since there
+              were only 5 eggs as well.
+            </p>
+            <p> 
+              Now, from the 20 eggs used in this test 18 were successfully grabbed, and figures <b>3a</b>,
+              <b>3b</b> and <b>3c</b> present some of those successes. From the two unsuccessfully grabbed eggs, one
+              was due to the incorrect determination of the surface’s normal, presented in figure <b>3d</b>, and
+              the other was caused by something not yet witnessed in these trials. Since the eggs become
+              lighter when emptied, at the moment the end effector moves closer to more distant objects,
+              the suction cup, sometimes, can push those objects when approaching them. This will cause
+              situations has the one visualized in figure <b>3e</b>. To solve this problem the suction can be
+              activated when the manipulator is approaching the object and not after.
+            </p>
+
+                  <p style="float: left; font-size: 15pt; text-align: center; width: 18%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test3OK12.jpg" style="width: 100%">3a</p>
+                  <p style="float: left; font-size: 15pt; text-align: center; width: 18%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test3OK22.jpg" style="width: 100%">3b</p>
+                  <p style="float: left; font-size: 15pt; text-align: center; width: 18%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test3OK32.jpg" style="width: 100%">3c</p>
+                  <p style="float: left; font-size: 15pt; text-align: center; width: 18%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test3normal2.jpg" style="width: 100%">3d</p>
+                  <p style="float: left; font-size: 15pt; text-align: center; width: 18%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test3Push2.jpg" style="width: 100%">3e</p>
+                  <p style="clear: both;"></p>
+          </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-sm-5" style="background-color:rgba(0,128,128, 0.099);">
+                  <div class="element">
+                      <center>
+                          <h2 class="post-title">
+                              Variety of Distinctive Shaped Objects
+                          </h2>
+                          <img src="img/test4.jpg" alt="" width="50%" height="50%"/> 
+                      </center>
+                  </div>
+            </div>
+            <div class="col-lg-7 col-md-8 mx-auto" style="background-color:rgba(255, 255, 0, 0.099);">
+                <p>
+                  The last and fourth test was performed now with a variety of distinctive shaped objects.
+                  In the last test cobbles, eggs, ping pong balls, duct
+                  tapes and small cylindrical objects were scattered in front of the manipulator, within the
+                  limits marked on the table. Those limits represent the intersection between the area observed
+                  by the Kinect and the space in which the robot can safely move. Once more, the process
+                  applied in the other tests was used, and the objects were picked from the largest object to the
+                  smallest, i.e., objects represented by point clouds with more points were the first to be picked.
+                </p>
+                <p> 
+                  Now, from the 20 eggs used in this test 18 were successfully grabbed, and figures 7.8a,
+                  7.8b and 7.8c present some of those successes. From the two unsuccessfully grabbed eggs, one
+                  was due to the incorrect determination of the surface’s normal, presented in figure 7.8d, and
+                  the other was caused by something not yet witnessed in these trials. Since the eggs become
+                  lighter when emptied, at the moment the end effector moves closer to more distant objects,
+                  the suction cup, sometimes, can push those objects when approaching them. This will cause
+                  situations has the one visualized in figure 7.8e. To solve this problem the suction can be
+                  activated when the manipulator is approaching the object and not after.
+                </p>
+                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test2Normal2.jpg" style="width: 100%">2a</p>
+                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test2normal2.jpg" style="width: 100%">2b</p>
+                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test2kinectCent2.jpg" style="width: 100%">2c</p>
+                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test2farAway2.jpg" style="width: 100%">2d</p>
+                <p style="clear: both;"></p>
+              </div>
+          </div>
+      </div>
+
+        <div class="clearfix">
+            <a class="btn btn-primary float-left" href="post12,13e14.html">&larr;Previous Week </a>
+            <a class="btn btn-primary float-right" href="post16.html">Next Week &rarr;</a>
+          </div> 
+    </article>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <ul class="list-inline text-center">
+              <!-- <li class="list-inline-item">
+                <a href="#">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li> -->
+              <li class="list-inline-item">
+                <a href="https://www.facebook.com/joana.mota.9279">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="https://github.com/JoanaMota/Bin-picking">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+            </ul>
+            <p class="copyright text-muted">Copyright &copy; Your Website 2018</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/clean-blog.min.js"></script>
+
+  </body>
+
+</html>

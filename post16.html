@@ -198,6 +198,15 @@
             <center>
               <img src="img/ControlUnit.png" alt="" width="30%" height="50%"/>
             </center>
+            <div class="row">
+            <div class="col-sm-5" >
+                <div class="element">
+                    <center>
+                        <img src="img/SensorCali.gif" alt="" width="100%" height="100%"/> 
+                    </center>
+                </div>
+          </div>
+          <div class="col-lg-7 col-md-8 mx-auto">
             <p>
               Afterwards the laser sensor was
             re-calibrated with another process to ensure that the calibration curve, that links the sensor’s
@@ -215,6 +224,8 @@
             uses the distance displayed in the sensor’s monitor (red curve in the figure). Consequently the
             Arduino’s code was changed and uploaded.
             </p>
+          </div>
+        </div>
             <center>
               <img src="img/curves.png" alt="" width="90%" height="120%"/>
             </center>
@@ -270,7 +281,7 @@
                           <h2 class="post-title">
                               Variety of Distinctive Shaped Objects
                           </h2>
-                          <img src="img/test4.jpg" alt="" width="50%" height="50%"/> 
+                          <img src="img/test4.jpg" alt="" width="80%" height="80%"/> 
                       </center>
                   </div>
             </div>
@@ -285,20 +296,90 @@
                   smallest, i.e., objects represented by point clouds with more points were the first to be picked.
                 </p>
                 <p> 
-                  Now, from the 20 eggs used in this test 18 were successfully grabbed, and figures 7.8a,
-                  7.8b and 7.8c present some of those successes. From the two unsuccessfully grabbed eggs, one
-                  was due to the incorrect determination of the surface’s normal, presented in figure 7.8d, and
-                  the other was caused by something not yet witnessed in these trials. Since the eggs become
-                  lighter when emptied, at the moment the end effector moves closer to more distant objects,
-                  the suction cup, sometimes, can push those objects when approaching them. This will cause
-                  situations has the one visualized in figure 7.8e. To solve this problem the suction can be
-                  activated when the manipulator is approaching the object and not after.
+                  The two objects with flat surfaces were the first successfully grabbed at the first attempt.
                 </p>
-                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test2Normal2.jpg" style="width: 100%">2a</p>
-                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test2normal2.jpg" style="width: 100%">2b</p>
-                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test2kinectCent2.jpg" style="width: 100%">2c</p>
-                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test2farAway2.jpg" style="width: 100%">2d</p>
+                <center>
+                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test4pieceOK12.jpg" style="width: 100%">4a</p>
+                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test4pieceOK22.jpg" style="width: 100%">4b</p>
                 <p style="clear: both;"></p>
+                </center>
+                <p>
+                  The following largest object in the bin-picking process was the Lego piece. Since the surface
+                  of the piece captured by the Kinect was too inclined the determination of the correct surface’s
+                  normal kept failing, as can be seen in figure <b>4c</b> in which the object was not grabbed because
+                  of this problem. However, after moving the Lego to a less inclined position, presented in figure
+                  <b>4d</b>, the object was then grabbed at the first attempt, figure <b>4e</b>.
+                </p>
+
+                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test4LegoFAIL2.jpg" style="width: 100%">4c</p>
+                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test4LegoNewPos.jpg" style="width: 100%">4d</p>
+                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test4LegoOK2.jpg" style="width: 100%">4e</p>
+                <p style="clear: both;"></p>
+
+                <p>
+                    The next object to be picked was the duct tape, which despite being represented by a
+                    big point cloud it is a thin object and the grasping area must be properly centered for the
+                    suction cup to correctly grab it. Therefore, the first attempt, presented in figure <b>4f</b>, was
+                    unsuccessful. However, it took only one other try to successfully pick up the duct tape, which
+                    was recorded in figure <b>4g</b>.
+                </p>
+
+                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test4ductTapekinectFAIL2.jpg" style="width: 100%">4f</p>
+                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test4ductTapeOK2.jpg" style="width: 100%">4g</p>
+                <p style="clear: both;"></p>
+
+                <p>
+                    Afterwards the eggs were all correctly grabbed on the first attempt except for one. The
+                    moments of the grasping of the 3 eggs were captured.
+                </p>
+                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test4eggOK12.jpg" style="width: 100%">4h</p>
+                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test4eggOK22.jpg" style="width: 100%">4i</p>
+                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test4eggOK32.jpg" style="width: 100%">4j</p>
+                <p style="clear: both;"></p>
+
+                <p>
+                    The
+                    other egg was grabbed after two attempts, however, this one was positioned differently from
+                    the others, as can be seen in figure <b>4k</b>. In this position the observed surface of the egg will
+                    be its top which has a more accentuated curvature, making the determination of the correct
+                    surface’s normal even harder, which was the cause of error in the first unsuccessful attempt,
+                    presented in figure <b>4k</b>. The second attempt, shown in figure <b>4l</b>, was unsuccessful due
+                    to the fact that the suction cup is required to be closer to the object in this conditions even
+                    though the laser reading had been correct.
+                </p>
+                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test4eggverticalFAIL12.jpg" style="width: 100%">4k</p>
+                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test4eggverticalFAIL22.jpg" style="width: 100%">4l</p>
+                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test4eggverticalOK2.jpg" style="width: 100%">4m</p>
+                <p style="clear: both;"></p>
+
+                <p>
+                    The test proceeded to the grasping of the smaller objects, starting with the ping pong
+                    balls. The first ball was grabbed only at the second attempt, moment recorded in figure
+                    <b>4o</b>, once more due to a incorrect determination of the surface’s normal. Figure <b>4n</b> shows
+                    the first attempt to pick the first ball. The second ball could not be picked at the current
+                    position since it was too close to the manipulator and the MoveIt! planner was never able
+                    to generate a 100% successful plan to grab the object in those conditions. For this reason a
+                    second marking was used to better visualize the manipulators limits, which can be seen in
+                    figure <b>4p</b> near the ping pong ball. However, the MoveIt! planner was able to generate the
+                    movement to the centroid of the cylindrical piece, present in the same figure. This happened
+                    because, in oder to grab this flat object which is parallel to the table, the end effector would
+                    have to be perpendicular instead of reclined, which would be the necessary position to grab
+                    the ball.
+                  </p>
+                <p>
+                    Finally, the last small cylindrical pieces were all successfully grabbed on the first attempt.
+                </p>
+
+                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test4pingPongFAILnormal2.jpg" style="width: 100%">4n</p>
+                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test4pingPongOK2.jpg" style="width: 100%">4o</p>
+                <p style="float: left; font-size: 15pt; text-align: center; width: 24%; margin-right: 1%; margin-bottom: 0.5em;"><img src="img/test4distTOrobot.jpg" style="width: 100%">4p</p>
+                <p style="clear: both;"></p>
+                <p>
+                    In conclusion, from the 13 objects used in this fourth test, 8 were grabbed on the first
+                    attempt and the remaining after one or two other attempts. It should also be noted that
+                    through all the tests with fragile objects, as the eggs, none of those were ever deformed or
+                    broken in the grasping process, at most they were not collected.
+                </p>
               </div>
           </div>
       </div>
